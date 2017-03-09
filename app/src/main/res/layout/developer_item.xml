@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/app_white"
+    app:cardUseCompatPadding="true"
+    app:cardElevation="@dimen/cardview_default_elevation"
+    android:layout_marginLeft="@dimen/hdsevendp"
+    android:layout_marginRight="@dimen/hdsevendp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/item_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/hdfifteendp">
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/developerDp"
+                android:layout_width="@dimen/hdninetydp"
+                android:layout_height="@dimen/hdninetydp"
+                android:src="@drawable/user_uknown" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/hdtendp"
+                android:layout_marginRight="@dimen/hdtendp">
+
+                <TextView
+                    android:id="@+id/developerName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_name"
+                    android:textColor="@color/app_grey"
+                    android:textSize="@dimen/hdtwentysp" />
+
+                <ImageView
+                    android:id="@+id/locationIcon"
+                    android:layout_width="@dimen/hdtwentydp"
+                    android:layout_height="@dimen/hdtwentydp"
+                    android:layout_below="@id/developerName"
+                    android:layout_marginTop="@dimen/hdsevendp"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/location" />
+
+                <TextView
+                    android:id="@+id/locationText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/developerName"
+                    android:layout_marginTop="@dimen/hdsevendp"
+                    android:layout_toEndOf="@id/locationIcon"
+                    android:layout_toRightOf="@id/locationIcon"
+                    android:text="@string/location"
+                    android:textColor="@color/grey_700"
+                    android:textSize="@dimen/hdtwelvesp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/bg"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_height"
+            android:background="@color/colorAccent" />
+    </LinearLayout>
+</android.support.v7.widget.CardView>

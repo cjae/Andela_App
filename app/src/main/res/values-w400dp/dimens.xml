@@ -1,0 +1,23 @@
+<resources>
+    <!-- Home -->
+    <dimen name="thumbnail_width">120dp</dimen>
+    <dimen name="thumbnail_height">100dp</dimen>
+
+    <dimen name="hdheaderimagewidth">70dp</dimen>
+    <dimen name="hdheaderimageheight">30dp</dimen>
+
+    <dimen name="hdtwelvesp">14sp</dimen>
+    <dimen name="hdfourteensp">16sp</dimen>
+    <dimen name="hdsixteensp">18sp</dimen>
+    <dimen name="hdeighteensp">20sp</dimen>
+    <dimen name="hdtwentythreesp">26sp</dimen>
+    <dimen name="hdtwentyfivesp">27sp</dimen>
+
+    <dimen name="hdfivedp">10dp</dimen>
+    <dimen name="hdtendp">16dp</dimen>
+    <dimen name="hdthirtydp">40dp</dimen>
+    <dimen name="hdfiftydp">60dp</dimen>
+    <dimen name="hdonetwentydp">150dp</dimen>
+    <dimen name="hdtwohundreddp">250dp</dimen>
+    <dimen name="hdsliderheight">250dp</dimen>
+</resources>

@@ -1,0 +1,22 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="view_height">3dp</dimen>
+
+    <dimen name="hdtwelvesp">12sp</dimen>
+    <dimen name="hdfourteensp">14sp</dimen>
+    <dimen name="hdsixteensp">16sp</dimen>
+    <dimen name="hdeighteensp">18sp</dimen>
+    <dimen name="hdtwentysp">20sp</dimen>
+    <dimen name="hdtwentythreesp">23sp</dimen>
+    <dimen name="hdtwentyfivesp">25sp</dimen>
+
+    <dimen name="hdsevendp">7dp</dimen>
+    <dimen name="hdtendp">10dp</dimen>
+    <dimen name="hdfifteendp">15dp</dimen>
+    <dimen name="hdtwentydp">20dp</dimen>
+    <dimen name="hdseventydp">70dp</dimen>
+    <dimen name="hdninetydp">90dp</dimen>
+    <dimen name="hdhundreddp">100dp</dimen>
+</resources>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_white_shade"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.esod.andelaapp.activity.home.HomeActivity"
+    tools:showIn="@layout/activity_home">
+
+    <ProgressBar
+        android:id="@+id/progressLoader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
+    <LinearLayout
+        android:id="@+id/network_layout"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <ImageView
+            android:contentDescription="@string/app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:tint="@color/colorAccent"
+            android:src="@drawable/sadface"/>
+
+        <TextView
+            android:id="@+id/errorText"
+            android:layout_marginTop="@dimen/hdfivedp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textColor="@color/app_grey"
+            android:textSize="@dimen/hdfourteensp"
+            android:text="@string/errorText"/>
+
+        <TextView
+            android:id="@+id/errorText_ii"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textColor="@color/app_grey"
+            android:textSize="@dimen/hdfourteensp"
+            android:text="@string/errorText_ii"/>
+
+        <Button
+            android:id="@+id/retryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/app_white"
+            android:textColor="@color/app_green"
+            android:textSize="@dimen/hdeighteensp"
+            android:text="@string/retry"/>
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/developersRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:scrollbars="none"/>
+</RelativeLayout>
