@@ -76,25 +76,63 @@ public class HomeActivity extends AppCompatActivity
     }
 
     @Override
-    public void showDevelopersList(final List<Developer> developerList) {
+    public void showDevelopersList(final List<Developer> devList) {
+        developerList = devList;
+        page_no++;
+
         developersRecyclerView.setLayoutManager(mLayoutManager);
         developersRecyclerView.setHasFixedSize(true);
         developersRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         mAdapter = new RecyclerViewDataAdapter(this, developerList, developersRecyclerView);
         developersRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        //add null , so the adapter will check view_type and show progress bar at bottom
+                        developerList.add(null);
+                        mAdapter.notifyItemInserted(developerList.size() - 1);
+
+                        mUserActionListener.loadMore(getApplicationContext(), page_no);
+                    }
+                }, 500);
+            }
+        });
     }
 
     @Override
-    public void updateDeveloperList(final List<Developer> developerList) {
-//        loading = false;
-//
-//        devList.remove(devList.size() - 1);
-//        adapter.notifyItemRemoved(devList.size());
-//
-//        devList.addAll(developerList);
-//
-//        adapter.notifyItemInserted(devList.size() - 1);
+    public void updateDeveloperList(final List<Developer> devList) {
+        if(devList.isEmpty()){
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    //   remove progress item
+                    developerList.remove(developerList.size() - 1);
+                    mAdapter.notifyItemRemoved(developerList.size());
+
+                    mAdapter.setLoaded();
+                }
+            }, 2000);
+        } else {
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    //   remove progress item
+                    developerList.remove(developerList.size() - 1);
+                    mAdapter.notifyItemRemoved(developerList.size());
+
+                    developerList.addAll(devList);
+                    mAdapter.notifyItemInserted(developerList.size());
+
+                    page_no++;
+                    mAdapter.setLoaded();
+                }
+            }, 2000);
+        }
     }
 
     @OnClick(R.id.retryButton) void doRetry(){

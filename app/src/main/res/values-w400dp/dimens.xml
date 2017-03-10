@@ -1,8 +1,18 @@
 <resources>
+    <dimen name="imageHeight">90dp</dimen>
+
     <dimen name="hdtwelvesp">14sp</dimen>
     <dimen name="hdfourteensp">16sp</dimen>
     <dimen name="hdsixteensp">18sp</dimen>
     <dimen name="hdeighteensp">20sp</dimen>
+    <dimen name="hdtwentysp">22sp</dimen>
     <dimen name="hdtwentythreesp">26sp</dimen>
     <dimen name="hdtwentyfivesp">27sp</dimen>
+
+    <dimen name="hdtwentydp">20dp</dimen>
+    <dimen name="hdtwentyfivedp">25dp</dimen>
+    <dimen name="hdthirtyfivedp">35dp</dimen>
+    <dimen name="hdseventydp">70dp</dimen>
+    <dimen name="hdninetydp">90dp</dimen>
+    <dimen name="hdhundreddp">100dp</dimen>
 </resources>

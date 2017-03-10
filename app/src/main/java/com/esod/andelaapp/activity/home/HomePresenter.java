@@ -16,6 +16,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -46,7 +47,7 @@ class HomePresenter implements HomeContract.UserActionListener {
                 @Override
                 public void onResponse(Call<APIResponse> call, Response<APIResponse> response) {
                     try {
-                        List<Developer> developersList = new LinkedList<>();
+                        List<Developer> developersList = new ArrayList<>();
                         JSONArray itemArray = new JSONArray(new Gson().toJson(response.body().getItems()));
 
                         for(int i = 0;i<itemArray.length();i++) {
@@ -87,51 +88,49 @@ class HomePresenter implements HomeContract.UserActionListener {
 
     @Override
     public void loadMore(final Context context, int page_no) {
-//        String url = String.format(context.getString(R.string.url_format), page_no, 20);
-//
-//        if(CommonUtil.isNetworkAvailable(context)){
-//            ApiInterface apiService = APIClient.getClient().create(ApiInterface.class);
-//            Call<APIResponse> call = apiService.getDevelopers(url);
-//            call.enqueue(new Callback<APIResponse>() {
-//                @Override
-//                public void onResponse(Call<APIResponse> call, Response<APIResponse> response) {
-//                    try {
-//                        List<Developer> developersList = new LinkedList<>();
-//                        JSONArray itemArray = new JSONArray(new Gson().toJson(response.body().getItems()));
-//
-//                        if(itemArray.length() > 0) {
-//                            for(int i = 0;i<itemArray.length();i++) {
-//                                JSONObject myObject = itemArray.getJSONObject(i);
-//
-//                                int id  =  myObject.getInt(AppTags.DEVELOPER_ID);
-//                                String name  =  myObject.getString(AppTags.DEVELOPER_NAME);
-//                                String thumbnail  =  myObject.getString(AppTags.DEVELOPER_THUMBNAIL);
-//                                String url  =  myObject.getString(AppTags.DEVELOPER_HTML_URL);
-//                                int bg_color = CommonUtil.getRandomMaterialColor(context, "400");
-//
-//                                Developer developer = new Developer(id, name, thumbnail, url, bg_color, AppTags.CARD_DEVELOPER);
-//                                developersList.add(developer);
-//                            }
-//
-//                            Developer developer = new Developer();
-//                            developer.set_card_type(AppTags.CARD_LOADING);
-//                            developersList.add(developer);
-//
-//                            mHomeScreenView.updateDeveloperList(developersList);
-//                        }
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(Call<APIResponse> call, Throwable t) {
-//                    mHomeScreenView.showMessageToast("No network connection");
-//                }
-//            });
-//        } else {
-//            mHomeScreenView.showMessageToast("No network connection");
-//        }
+        String url = String.format(context.getString(R.string.url_format), page_no, 20);
+
+        if(CommonUtil.isNetworkAvailable(context)){
+            ApiInterface apiService = APIClient.getClient().create(ApiInterface.class);
+            Call<APIResponse> call = apiService.getDevelopers(url);
+            call.enqueue(new Callback<APIResponse>() {
+                @Override
+                public void onResponse(Call<APIResponse> call, Response<APIResponse> response) {
+                    try {
+                        List<Developer> developersList = new ArrayList<>();
+                        JSONArray itemArray = new JSONArray(new Gson().toJson(response.body().getItems()));
+
+                        for(int i = 0;i<itemArray.length();i++) {
+                            JSONObject myObject = itemArray.getJSONObject(i);
+
+                            int id  =  myObject.getInt(AppTags.DEVELOPER_ID);
+                            String name  =  myObject.getString(AppTags.DEVELOPER_NAME);
+                            String thumbnail  =  myObject.getString(AppTags.DEVELOPER_THUMBNAIL);
+                            String url  =  myObject.getString(AppTags.DEVELOPER_HTML_URL);
+                            int bg_color = CommonUtil.getRandomMaterialColor(context, "400");
+
+                            Developer developer = new Developer(id, name, thumbnail, url, bg_color);
+                            developersList.add(developer);
+                        }
+
+                        mHomeScreenView.updateDeveloperList(developersList);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<APIResponse> call, Throwable t) {
+                    List<Developer> developersList = new ArrayList<>();
+                    mHomeScreenView.updateDeveloperList(developersList);
+                    mHomeScreenView.showMessageToast("No network connection");
+                }
+            });
+        } else {
+            List<Developer> developersList = new ArrayList<>();
+            mHomeScreenView.updateDeveloperList(developersList);
+            mHomeScreenView.showMessageToast("No network connection");
+        }
     }
 
     @Override

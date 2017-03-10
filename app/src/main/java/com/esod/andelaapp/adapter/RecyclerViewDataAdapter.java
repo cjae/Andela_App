@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.esod.andelaapp.R;
+import com.esod.andelaapp.event.DeveloperItemClickEvent;
 import com.esod.andelaapp.model.Developer;
 import com.esod.andelaapp.util.AppTags;
 import com.esod.andelaapp.util.OnLoadMoreListener;
@@ -18,6 +19,8 @@ import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -88,7 +91,8 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter {
 
             final Developer developer = developerList.get(position);
 
-            ((DeveloperViewHolder) holder).developerName.setText(developer.get_login());
+            String text = String.format(context.getString(R.string.username_format), developer.get_login());
+            ((DeveloperViewHolder) holder).developerName.setText(text);
             ((DeveloperViewHolder) holder).developerDp.setBorderColor(developer.get_bg_color());
             Picasso.with(context)
                     .load(developer.get_avatar_url())
@@ -110,6 +114,13 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter {
                         }
                     });
             ((DeveloperViewHolder) holder).bg.setBackgroundColor(developer.get_bg_color());
+
+            ((DeveloperViewHolder) holder).item_content.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    EventBus.getDefault().post(new DeveloperItemClickEvent(developer));
+                }
+            });
 
         }
     }

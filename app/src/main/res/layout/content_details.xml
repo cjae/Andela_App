@@ -32,10 +32,9 @@
 
             <TextView
                 android:id="@+id/linkText"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/hdtendp"
-                android:layout_marginRight="@dimen/hdtendp"
+                android:padding="@dimen/hdtendp"
                 android:textSize="@dimen/hdfourteensp"
                 android:textColor="@color/app_blue"/>
         </LinearLayout>
