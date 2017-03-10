@@ -30,12 +30,12 @@ dependencies {
     compile 'com.android.support:design:25.2.0'
     testCompile 'junit:junit:4.12'
 
-    // Renderers
-    compile 'com.github.pedrovgs:renderers:3.0.0'
+    // Butter Knife
     compile 'com.jakewharton:butterknife:7.0.1'
 
     // Picasso
     compile 'com.squareup.picasso:picasso:2.5.0'
+    compile 'com.android.support:palette-v7:25.2.0'
 
     // RecyclerView and CardView
     compile 'com.android.support:recyclerview-v7:25.2.0'

@@ -10,33 +10,19 @@ import java.util.List;
  * Created by Jedidiah on 09/03/2017.
  */
 
-public interface DetailsContract {
+interface DetailsContract {
 
     interface View {
-        void showDevelopersList(List<Developer> developerList);
 
-        void showNetworkErrorView();
+        void showWebView(String url);
 
-        void hideNetworkErrorView();
-
-        void showProgress();
-
-        void hideProgress();
-
-        void showDetailsScreen(Developer developer);
-
-        void showMessageToast(String message);
+        void doShareIntent(String username, String url);
     };
 
     interface UserActionListener {
-        void getDataFromServer(Context context);
 
-        void listItemClick(Developer developer);
+        void linkClick(String url);
 
-        void loadMore();
-
-        void refreshClick();
-
-        void retryButtonClick();
+        void shareButtonClick(String username, String url);
     }
 }

@@ -2,6 +2,7 @@ package com.esod.andelaapp.activity.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,19 +14,17 @@ import android.widget.Toast;
 
 import com.esod.andelaapp.R;
 import com.esod.andelaapp.activity.detail.DetailsActivity;
+import com.esod.andelaapp.adapter.RecyclerViewDataAdapter;
 import com.esod.andelaapp.event.DeveloperItemClickEvent;
 import com.esod.andelaapp.model.Developer;
-import com.esod.andelaapp.renderer.DeveloperRenderer;
-import com.pedrogomez.renderers.AdapteeCollection;
-import com.pedrogomez.renderers.ListAdapteeCollection;
-import com.pedrogomez.renderers.RVRendererAdapter;
-import com.pedrogomez.renderers.Renderer;
-import com.pedrogomez.renderers.RendererBuilder;
+import com.esod.andelaapp.util.AppTags;
+import com.esod.andelaapp.util.OnLoadMoreListener;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -46,35 +45,61 @@ public class HomeActivity extends AppCompatActivity
     @Bind(R.id.developersRecyclerView)
     RecyclerView developersRecyclerView;
 
+    LinearLayoutManager mLayoutManager;
+
+    private RecyclerViewDataAdapter mAdapter;
+
+    private List<Developer> developerList;
+
+    protected Handler handler;
+
+    int page_no = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        if(getSupportActionBar()!= null) {
+            getSupportActionBar().setTitle(getString(R.string.title_activity_home));
+        }
 
         ButterKnife.bind(this);
 
+        mLayoutManager = new LinearLayoutManager(this);
+        developerList = new ArrayList<>();
+        handler = new Handler();
+
         mUserActionListener = new HomePresenter(this);
-        mUserActionListener.getDataFromServer(getApplicationContext());
+        mUserActionListener.getDataFromServer(getApplicationContext(), page_no);
     }
 
     @Override
-    public void showDevelopersList(List<Developer> developerList) {
-        AdapteeCollection<Developer> developersCollection = new ListAdapteeCollection<>(developerList);
-        Renderer<Developer> renderer = new DeveloperRenderer();
-        RendererBuilder<Developer> rendererBuilder = new RendererBuilder<>(renderer);
-        RVRendererAdapter<Developer> adapter = new RVRendererAdapter<>(rendererBuilder, developersCollection);
-
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
+    public void showDevelopersList(final List<Developer> developerList) {
         developersRecyclerView.setLayoutManager(mLayoutManager);
+        developersRecyclerView.setHasFixedSize(true);
         developersRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        developersRecyclerView.setAdapter(adapter);
+
+        mAdapter = new RecyclerViewDataAdapter(this, developerList, developersRecyclerView);
+        developersRecyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void updateDeveloperList(final List<Developer> developerList) {
+//        loading = false;
+//
+//        devList.remove(devList.size() - 1);
+//        adapter.notifyItemRemoved(devList.size());
+//
+//        devList.addAll(developerList);
+//
+//        adapter.notifyItemInserted(devList.size() - 1);
     }
 
     @OnClick(R.id.retryButton) void doRetry(){
         mUserActionListener.retryButtonClick();
-        mUserActionListener.getDataFromServer(getApplicationContext());
+        mUserActionListener.getDataFromServer(getApplicationContext(), page_no);
     }
 
     @Override
@@ -87,6 +112,14 @@ public class HomeActivity extends AppCompatActivity
     public void hideNetworkErrorView() {
         progressLoader.setVisibility(View.VISIBLE);
         network_layout.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void displayTotalDevelopers(int total) {
+        String text = String.format(getString(R.string.total_format), total);
+        if(getSupportActionBar()!= null) {
+            getSupportActionBar().setSubtitle(text);
+        }
     }
 
     @Override
@@ -104,6 +137,9 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public void showDetailsScreen(Developer developer) {
         Intent intent = new Intent(this, DetailsActivity.class);
+        intent.putExtra("username", developer.get_login());
+        intent.putExtra("dp", developer.get_avatar_url());
+        intent.putExtra("url", developer.get_html_url());
         startActivity(intent);
     }
 

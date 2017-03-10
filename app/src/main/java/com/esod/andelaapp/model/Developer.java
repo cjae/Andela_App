@@ -9,14 +9,14 @@ public class Developer {
     private int _id;
     private String _login;
     private String _avatar_url;
-    private String _url;
+    private String _html_url;
     private int _bg_color;
 
-    public Developer(int _id, String _login, String _avatar_url, String _url, int _bg_color) {
+    public Developer(int _id, String _login, String _avatar_url, String _html_url, int _bg_color) {
         this._id = _id;
         this._login = _login;
         this._avatar_url = _avatar_url;
-        this._url = _url;
+        this._html_url = _html_url;
         this._bg_color = _bg_color;
     }
 
@@ -44,12 +44,12 @@ public class Developer {
         this._avatar_url = _avatar_url;
     }
 
-    public String get_url() {
-        return _url;
+    public String get_html_url() {
+        return _html_url;
     }
 
-    public void set_url(String _url) {
-        this._url = _url;
+    public void set_html_url(String _html_url) {
+        this._html_url = _html_url;
     }
 
     public int get_bg_color() {

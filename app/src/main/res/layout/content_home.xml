@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/app_white_shade"
+    android:background="@color/app_white_smoke"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.esod.andelaapp.activity.home.HomeActivity"
     tools:showIn="@layout/activity_home">
@@ -56,7 +56,7 @@
             android:id="@+id/retryButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/app_white"
+            android:background="@color/app_white_smoke"
             android:textColor="@color/app_green"
             android:textSize="@dimen/hdeighteensp"
             android:text="@string/retry"/>

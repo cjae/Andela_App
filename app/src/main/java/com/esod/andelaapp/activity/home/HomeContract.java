@@ -15,9 +15,13 @@ interface HomeContract {
     interface View {
         void showDevelopersList(List<Developer> developerList);
 
+        void updateDeveloperList(List<Developer> developerList);
+
         void showNetworkErrorView();
 
         void hideNetworkErrorView();
+
+        void displayTotalDevelopers(int total);
 
         void showProgress();
 
@@ -29,11 +33,11 @@ interface HomeContract {
     };
 
     interface UserActionListener {
-        void getDataFromServer(Context context);
+        void getDataFromServer(Context context, int page_no);
 
         void listItemClick(Developer developer);
 
-        void loadMore();
+        void loadMore(Context applicationContext, int page_no);
 
         void refreshClick();
 

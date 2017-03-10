@@ -10,7 +10,6 @@ import com.esod.andelaapp.rest.APIClient;
 import com.esod.andelaapp.rest.ApiInterface;
 import com.esod.andelaapp.util.AppTags;
 import com.esod.andelaapp.util.CommonUtil;
-import com.esod.andelaapp.util.SessionManager;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -37,8 +36,7 @@ class HomePresenter implements HomeContract.UserActionListener {
     }
 
     @Override
-    public void getDataFromServer(final Context context) {
-        final int page_no = SessionManager.getPageNo(context);
+    public void getDataFromServer(final Context context, int page_no) {
         String url = String.format(context.getString(R.string.url_format), page_no, 20);
 
         if(CommonUtil.isNetworkAvailable(context)){
@@ -57,16 +55,15 @@ class HomePresenter implements HomeContract.UserActionListener {
                             int id  =  myObject.getInt(AppTags.DEVELOPER_ID);
                             String name  =  myObject.getString(AppTags.DEVELOPER_NAME);
                             String thumbnail  =  myObject.getString(AppTags.DEVELOPER_THUMBNAIL);
-                            String url  =  myObject.getString(AppTags.DEVELOPER_URL);
+                            String url  =  myObject.getString(AppTags.DEVELOPER_HTML_URL);
                             int bg_color = CommonUtil.getRandomMaterialColor(context, "400");
 
                             Developer developer = new Developer(id, name, thumbnail, url, bg_color);
                             developersList.add(developer);
                         }
 
-                        int counter = page_no;
-                        SessionManager.setPageNo(context, counter++);
                         mHomeScreenView.hideProgress();
+                        mHomeScreenView.displayTotalDevelopers(response.body().getTotal_count());
                         mHomeScreenView.showDevelopersList(developersList);
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -89,8 +86,52 @@ class HomePresenter implements HomeContract.UserActionListener {
     }
 
     @Override
-    public void loadMore() {
-
+    public void loadMore(final Context context, int page_no) {
+//        String url = String.format(context.getString(R.string.url_format), page_no, 20);
+//
+//        if(CommonUtil.isNetworkAvailable(context)){
+//            ApiInterface apiService = APIClient.getClient().create(ApiInterface.class);
+//            Call<APIResponse> call = apiService.getDevelopers(url);
+//            call.enqueue(new Callback<APIResponse>() {
+//                @Override
+//                public void onResponse(Call<APIResponse> call, Response<APIResponse> response) {
+//                    try {
+//                        List<Developer> developersList = new LinkedList<>();
+//                        JSONArray itemArray = new JSONArray(new Gson().toJson(response.body().getItems()));
+//
+//                        if(itemArray.length() > 0) {
+//                            for(int i = 0;i<itemArray.length();i++) {
+//                                JSONObject myObject = itemArray.getJSONObject(i);
+//
+//                                int id  =  myObject.getInt(AppTags.DEVELOPER_ID);
+//                                String name  =  myObject.getString(AppTags.DEVELOPER_NAME);
+//                                String thumbnail  =  myObject.getString(AppTags.DEVELOPER_THUMBNAIL);
+//                                String url  =  myObject.getString(AppTags.DEVELOPER_HTML_URL);
+//                                int bg_color = CommonUtil.getRandomMaterialColor(context, "400");
+//
+//                                Developer developer = new Developer(id, name, thumbnail, url, bg_color, AppTags.CARD_DEVELOPER);
+//                                developersList.add(developer);
+//                            }
+//
+//                            Developer developer = new Developer();
+//                            developer.set_card_type(AppTags.CARD_LOADING);
+//                            developersList.add(developer);
+//
+//                            mHomeScreenView.updateDeveloperList(developersList);
+//                        }
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(Call<APIResponse> call, Throwable t) {
+//                    mHomeScreenView.showMessageToast("No network connection");
+//                }
+//            });
+//        } else {
+//            mHomeScreenView.showMessageToast("No network connection");
+//        }
     }
 
     @Override

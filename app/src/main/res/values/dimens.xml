@@ -12,10 +12,13 @@
     <dimen name="hdtwentythreesp">23sp</dimen>
     <dimen name="hdtwentyfivesp">25sp</dimen>
 
+    <dimen name="hdfivedp">5dp</dimen>
     <dimen name="hdsevendp">7dp</dimen>
     <dimen name="hdtendp">10dp</dimen>
     <dimen name="hdfifteendp">15dp</dimen>
     <dimen name="hdtwentydp">20dp</dimen>
+    <dimen name="hdtwentyfivedp">25dp</dimen>
+    <dimen name="hdthirtyfivedp">35dp</dimen>
     <dimen name="hdseventydp">70dp</dimen>
     <dimen name="hdninetydp">90dp</dimen>
     <dimen name="hdhundreddp">100dp</dimen>
