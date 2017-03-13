@@ -93,7 +93,6 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter {
 
             String text = String.format(context.getString(R.string.username_format), developer.get_login());
             ((DeveloperViewHolder) holder).developerName.setText(text);
-            ((DeveloperViewHolder) holder).developerDp.setBorderColor(developer.get_bg_color());
             Picasso.with(context)
                     .load(developer.get_avatar_url())
                     .placeholder(R.drawable.user_uknown)

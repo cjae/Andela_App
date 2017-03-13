@@ -38,7 +38,7 @@ class HomePresenter implements HomeContract.UserActionListener {
 
     @Override
     public void getDataFromServer(final Context context, int page_no) {
-        String url = String.format(context.getString(R.string.url_format), page_no, 20);
+        String url = String.format(context.getString(R.string.url_format), page_no, 25);
 
         if(CommonUtil.isNetworkAvailable(context)){
             ApiInterface apiService = APIClient.getClient().create(ApiInterface.class);
@@ -88,7 +88,7 @@ class HomePresenter implements HomeContract.UserActionListener {
 
     @Override
     public void loadMore(final Context context, int page_no) {
-        String url = String.format(context.getString(R.string.url_format), page_no, 20);
+        String url = String.format(context.getString(R.string.url_format), page_no, 25);
 
         if(CommonUtil.isNetworkAvailable(context)){
             ApiInterface apiService = APIClient.getClient().create(ApiInterface.class);
@@ -131,11 +131,6 @@ class HomePresenter implements HomeContract.UserActionListener {
             mHomeScreenView.updateDeveloperList(developersList);
             mHomeScreenView.showMessageToast("No network connection");
         }
-    }
-
-    @Override
-    public void refreshClick() {
-
     }
 
     @Override

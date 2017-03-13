@@ -85,7 +85,7 @@ public class DetailsActivity extends AppCompatActivity
                                 .generate(new Palette.PaletteAsyncListener() {
                                     @Override
                                     public void onGenerated(Palette palette) {
-                                        setToolbarColor(palette);
+                                        setStatusBarColor(palette);
                                     }
                                 });
                     }
@@ -109,7 +109,7 @@ public class DetailsActivity extends AppCompatActivity
         });
     }
 
-    private void setToolbarColor(Palette palette){
+    private void setStatusBarColor(Palette palette){
         int defaultDarkColor = ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

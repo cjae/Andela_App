@@ -56,10 +56,10 @@
             android:id="@+id/retryButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/app_white_smoke"
             android:textColor="@color/app_green"
             android:textSize="@dimen/hdeighteensp"
-            android:text="@string/retry"/>
+            android:text="@string/retry"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"/>
 
     </LinearLayout>
 

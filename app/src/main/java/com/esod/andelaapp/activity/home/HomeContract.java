@@ -23,8 +23,6 @@ interface HomeContract {
 
         void displayTotalDevelopers(int total);
 
-        void showProgress();
-
         void hideProgress();
 
         void showDetailsScreen(Developer developer);
@@ -38,8 +36,6 @@ interface HomeContract {
         void listItemClick(Developer developer);
 
         void loadMore(Context applicationContext, int page_no);
-
-        void refreshClick();
 
         void retryButtonClick();
     }

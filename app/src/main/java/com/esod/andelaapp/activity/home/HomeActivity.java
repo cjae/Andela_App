@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.esod.andelaapp.R;
@@ -44,6 +45,9 @@ public class HomeActivity extends AppCompatActivity
 
     @Bind(R.id.developersRecyclerView)
     RecyclerView developersRecyclerView;
+
+    @Bind(R.id.totalUserText)
+    TextView totalUserText;
 
     LinearLayoutManager mLayoutManager;
 
@@ -155,15 +159,7 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public void displayTotalDevelopers(int total) {
         String text = String.format(getString(R.string.total_format), total);
-        if(getSupportActionBar()!= null) {
-            getSupportActionBar().setSubtitle(text);
-        }
-    }
-
-    @Override
-    public void showProgress() {
-        progressLoader.setVisibility(View.VISIBLE);
-        developersRecyclerView.setVisibility(View.GONE);
+        totalUserText.setText(text);
     }
 
     @Override
